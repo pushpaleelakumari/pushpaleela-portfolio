@@ -6,25 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "build:snap": "tsc -b && vite build && react-snap",
+    "build:snap": "tsc -b && vite build && node scripts/prerender.mjs",
     "preview": "vite preview",
     "lint": "eslint ."
-  },
-  "reactSnap": {
-    "source": "dist",
-    "minifyHtml": {
-      "collapseWhitespace": false,
-      "removeComments": false
-    },
-    "crawl": true,
-    "include": [
-      "/"
-    ],
-    "puppeteerArgs": [
-      "--no-sandbox",
-      "--disable-setuid-sandbox"
-    ],
-    "skipThirdPartyRequests": true
   },
   "dependencies": {
     "react": "^19.2.0",
@@ -35,6 +19,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@sparticuz/chromium": "^147.0.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
@@ -46,7 +31,6 @@
     "globals": "^16.5.0",
     "postcss": "^8.5.6",
     "puppeteer-core": "^24.43.1",
-    "react-snap": "^1.23.0",
     "tailwindcss": "^3.4.13",
     "tailwindcss-animate": "^1.0.7",
     "typescript": "~5.9.3",

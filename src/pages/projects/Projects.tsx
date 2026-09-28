@@ -4,6 +4,10 @@ import { Autoplay } from "swiper/modules"
 import type { Swiper as SwiperClass } from "swiper"
 import "swiper/css"
 
+// Swiper's loop mode reorders slide DOM on init; skip init while prerendering
+// so the snapshot matches React's first render and hydrates cleanly.
+const IS_PRERENDER = typeof navigator !== "undefined" && navigator.userAgent === "ReactSnap"
+
 const HIRINGHOOD_STACK = [
   "React.js",
   "React Query",
@@ -232,6 +236,7 @@ function Projects() {
         <div className="projects-carousel reveal">
           <Swiper
             modules={[Autoplay]}
+            init={!IS_PRERENDER}
             grabCursor
             loop
             autoplay={{ delay: 2600, disableOnInteraction: false }}
